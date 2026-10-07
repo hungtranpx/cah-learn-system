@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
   if (path === "/hello" || path.startsWith("/hello/")) {
     res.writeHead(200);
     return res.end(
-      JSON.stringify({ message: "Xin chao tu cah-learn", version: VERSION, pod: os.hostname() })
+      JSON.stringify({ message: "Xin chao, ban vua trien khai bang CI", version: VERSION, pod: os.hostname() })
     );
   }
   res.writeHead(404);

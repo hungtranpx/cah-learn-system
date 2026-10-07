@@ -47,3 +47,13 @@ jobs:
 
       - name: Show image
         run: echo "::notice title=Image::ghcr.io/${{ github.repository_owner }}/cah-learn-hello:${{ steps.image-tag.outputs.value }}"
+
+      - name: Dispatch update to devops repo
+        env:
+          GH_TOKEN: ${{ secrets.DEVOPS_DISPATCH_TOKEN }}
+        run: |
+          gh workflow run update-image-on-trigger.yaml \
+            --repo ${{ github.repository_owner }}/cah-learn-devops \
+            --ref dev \
+            -f serviceName=helloService \
+            -f imageTag=${{ steps.image-tag.outputs.value }}
